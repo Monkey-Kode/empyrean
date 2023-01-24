@@ -57,35 +57,36 @@ const PardotForm = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement & FormFields;
-    const formData = new FormData(form);
-    const formDataJson: FormValues = {
-      first_name: '',
-      last_name: '',
-      email: '',
-      company: '',
-      maturity_assessment_score: '0',
-    };
-    formData.forEach((value, key) => {
-      if (typeof value === 'string') {
-        formDataJson[key] = value;
-      }
-    });
-    try {
-      const response = await fetch('/api/pardot', {
-        method: 'POST',
-        body: JSON.stringify(formDataJson),
-      });
-      const data = await response.json();
-      console.log('data', data);
+    // const form = e.target as HTMLFormElement & FormFields;
+    // const formData = new FormData(form);
+    // const formDataJson: FormValues = {
+    //   first_name: '',
+    //   last_name: '',
+    //   email: '',
+    //   company: '',
+    //   maturity_assessment_score: '0',
+    // };
+    // formData.forEach((value, key) => {
+    //   if (typeof value === 'string') {
+    //     formDataJson[key] = value;
+    //   }
+    // });
+    setSuccess(true);
+    // try {
+    //   const response = await fetch('/api/pardot', {
+    //     method: 'POST',
+    //     body: JSON.stringify(formDataJson),
+    //   });
+    //   const data = await response.json();
+    //   console.log('data', data);
 
-      if (data.success) {
-        setSuccess(true);
-        // await handleReport();
-      }
-    } catch (error) {
-      console.error('error', error);
-    }
+    //   if (data.success) {
+    //     setSuccess(true);
+    //     // await handleReport();
+    //   }
+    // } catch (error) {
+    //   console.error('error', error);
+    // }
   };
   return success ? (
     <div className={s.printPage}>
@@ -113,7 +114,7 @@ const PardotForm = () => {
       {errorMessage && <ErrorMessage message={errorMessage} />}
       <form
         acceptCharset="UTF-8"
-        action="https://info.goempyrean.com/l/71942/2022-03-04/b54xmp"
+        // action="https://info.goempyrean.com/l/71942/2022-03-04/b54xmp"
         method="post"
         id="pardot-form"
         className={s.form}

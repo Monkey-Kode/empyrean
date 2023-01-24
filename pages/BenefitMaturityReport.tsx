@@ -8,6 +8,7 @@ import { FormStateProvider } from '../framework/context/form';
 import { TitleProvider } from '../framework/context/title';
 import { EmailModalProvider } from '../framework/context/emailModal/indext';
 import EmailModal from '../components/common/EmailModal';
+import Script from 'next/script';
 
 const Participate: NextPageWithLayout = () => {
   return (
@@ -29,7 +30,16 @@ const Participate: NextPageWithLayout = () => {
   );
 };
 Participate.getLayout = function getLayout(page) {
-  return <Layout>{page}</Layout>;
+  return (
+    <>
+      <Layout>{page}</Layout>
+      <Script
+        id="hs-script-loader"
+        src="//js.hs-scripts.com/22550683.js"
+        strategy="afterInteractive"
+      />
+    </>
+  );
 };
 
 export default Participate;
