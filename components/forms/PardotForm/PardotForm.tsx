@@ -59,8 +59,11 @@ const PardotForm = () => {
     e.preventDefault();
     const form = e.target as HTMLFormElement & FormFields;
     const formData = new FormData(form);
-    const checkNoValuesAreEmpty = Array.from(formData.values()).every(
-      (value) => Boolean(value) && value !== ''
+    const valuesWithoutHidden = Array.from(formData.entries()).filter(
+      ([key, _]) => key !== 'maturity_assessment_score'
+    );
+    const checkNoValuesAreEmpty = valuesWithoutHidden.every(
+      ([_, value]) => Boolean(value) && value !== ''
     );
 
     if (checkNoValuesAreEmpty) {
@@ -146,7 +149,6 @@ const PardotForm = () => {
             required={'required'}
           />
         </div>
-
         <div>
           <Input
             label="Business Email"
