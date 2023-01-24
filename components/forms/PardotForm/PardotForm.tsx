@@ -57,8 +57,18 @@ const PardotForm = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // const form = e.target as HTMLFormElement & FormFields;
-    // const formData = new FormData(form);
+    const form = e.target as HTMLFormElement & FormFields;
+    const formData = new FormData(form);
+    const checkNoValuesAreEmpty = Array.from(formData.values()).every(
+      (value) => Boolean(value) && value !== ''
+    );
+
+    if (checkNoValuesAreEmpty) {
+      setSuccess(true);
+    } else {
+      // console.error('error', 'Please fill out all fields.');
+      setErrorMessage('Please fill out all fields.');
+    }
     // const formDataJson: FormValues = {
     //   first_name: '',
     //   last_name: '',
@@ -71,7 +81,7 @@ const PardotForm = () => {
     //     formDataJson[key] = value;
     //   }
     // });
-    setSuccess(true);
+    // setSuccess(true);
     // try {
     //   const response = await fetch('/api/pardot', {
     //     method: 'POST',
@@ -116,7 +126,7 @@ const PardotForm = () => {
         acceptCharset="UTF-8"
         // action="https://info.goempyrean.com/l/71942/2022-03-04/b54xmp"
         method="post"
-        id="pardot-form"
+        id="Benefits_Maturity_Assessment"
         className={s.form}
         onSubmit={handleSubmit}
       >
@@ -125,7 +135,7 @@ const PardotForm = () => {
             label="First Name"
             type="text"
             name="first_name"
-            required={true}
+            required={'required'}
           />
         </div>
         <div>
@@ -133,7 +143,7 @@ const PardotForm = () => {
             label="Last Name"
             type="text"
             name="last_name"
-            required={true}
+            required={'required'}
           />
         </div>
 
@@ -142,18 +152,24 @@ const PardotForm = () => {
             label="Business Email"
             type="email"
             name="email"
-            required={true}
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            required={'required'}
           />{' '}
         </div>
         <div>
-          <Input label="Company" type="text" name="company" required={true} />
+          <Input
+            label="Company"
+            type="text"
+            name="company"
+            required={'required'}
+          />
         </div>
         <div className="form-field job-title required">
           <Input
             label="Job Title"
             type="text"
             name="job_title"
-            required={true}
+            required={'required'}
           />
         </div>
         <input type="hidden" name="maturity_assessment_score" />
